@@ -1,0 +1,101 @@
+// colors
+
+// button linear gradient
+
+$fuchsia: #E65895;
+$purple: #BC6BE8;
+
+
+// layout colors
+$color-primary: #393F6E;
+$color-secondary: #E2E4F3;
+$color-accent: #343964;
+$color-highlight: #3E9FFF;
+$color-alert: #DD524C;
+$color-neutral: #8B8EAB;
+$color-light: #FFECC8;
+
+$btn-horizontal-gradient: linear-gradient(90deg, $fuchsia, $purple);
+$btn-vertical-gradient: linear-gradient(180deg, $fuchsia, $purple);
+
+
+// text sizes
+
+$font-size-xxs: 0.875rem;
+$font-size-xs: 1rem;
+$font-size-sm: 1.25rem;
+$font-size-md: 1.5rem;
+$font-size-lg: 2rem;
+
+// utility classes
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-between {
+  align-items: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.mx-auto{
+    margin-inline: auto;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+
+// layout
+
+.max-w-1200 {
+  max-width: 1200px;
+}
+
+.max-w-800 {
+  max-width: 800px;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
