@@ -7,6 +7,7 @@
     padding-inline: 2rem;
     padding-block: 2.5rem;
     background-color: $color-primary;
+    border-radius: 1rem;
 
     h1 {
       color: $color-neutral;
@@ -24,11 +25,21 @@
         background-color: $color-accent;
         color: $color-secondary;
         font-size: $font-size-sm;
+        transition: background-color 0.3s;
+        border: 1px solid $color-accent;
+
+        &:hover {
+          background-color: $color-primary;
+        }
 
         &.active {
           background: $btn-horizontal-gradient;
         }
       }
+    }
+
+    .questions-container {
+      margin-top: 2rem;
     }
   }
 }
