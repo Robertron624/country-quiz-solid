@@ -274,8 +274,8 @@ export interface PostalCode {
 export interface QuestionType {
     id?: number;
     type?: 'capital' | 'flag';
-    options?: string[];
-    correctAnswer?: string;
+    options: string[];
+    correctAnswer: string;
     flagUrl?: string;
     countryCapital?: string;
 }

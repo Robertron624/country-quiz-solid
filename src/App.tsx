@@ -25,8 +25,19 @@ const NOMBER_OF_QUESTIONS = 10;
 const numbers = Array.from({ length: NOMBER_OF_QUESTIONS }, (_, i) => i + 1);
 
 const fetchCountries = async () => {
-  const response = await Axios.get<Country[]>(`${baseCountryUrl}all`);
-  return response.data;
+  try {
+    const response = await Axios.get<Country[]>(`${baseCountryUrl}all`);
+    
+    if(response.status !== 200) {
+      throw new Error("Error while fetching countries");
+    }
+
+    return response.data;
+  }
+  catch (error) {
+    console.error("Error while fetching countries: ", error);
+    return [];
+  }
 };
 
 interface CircleNumberProps {
@@ -61,8 +72,8 @@ const App: Component = () => {
   const [countries] = createResource(fetchCountries);
   const [currentQuestion, setCurrentQuestion] = createSignal(1);
   const [questions, setQuestions] = createSignal<QuestionType[]>([]);
+  const [isGameFinished, setIsGameFinished] = createSignal(false);
   
-
   function handleNumberClick(event: Event) {
     const target = event.target as HTMLButtonElement;
     const questionNumber = parseInt(target.dataset.question || "1", 10);
@@ -73,10 +84,7 @@ const App: Component = () => {
   createEffect(() => {
     if (!countries.loading && !countries.error && countries() && countries()!.length > 0) {
       const questionsData = getQuestions(countries()!, NOMBER_OF_QUESTIONS);
-      console.log("questionsData", questionsData)
       setQuestions(questionsData);
-
-      console.log("questions signal", questions());
     }
   });
 
