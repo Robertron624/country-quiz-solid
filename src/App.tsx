@@ -1,10 +1,21 @@
 import type { Component } from "solid-js";
-import {For, createSignal, createEffect, createMemo, createResource, Switch, Match, Show, onCleanup, Suspense} from "solid-js";
+import {
+  For,
+  createSignal,
+  createEffect,
+  createMemo,
+  createResource,
+  Switch,
+  Match,
+  Show,
+  onCleanup,
+  Suspense,
+} from "solid-js";
 import Axios from "axios";
 
 import Question from "./components/Question";
 import { Country, QuestionType } from "./types";
-import { getQuestions, shuffleArray } from "./utils";
+import { getQuestions } from "./utils";
 
 import "./App.scss";
 import Loader from "./components/Loader";
@@ -16,7 +27,7 @@ const numbers = Array.from({ length: NOMBER_OF_QUESTIONS }, (_, i) => i + 1);
 const fetchCountries = async () => {
   const response = await Axios.get<Country[]>(`${baseCountryUrl}all`);
   return response.data;
-}
+};
 
 interface CircleNumberProps {
   circleNumber: number;
@@ -34,7 +45,9 @@ const CircleNumber: Component<CircleNumberProps> = ({
 
   return (
     <button
-      class={`circle-number flex justify-center align-center ${isButtonActive() ? "active" : ""}
+      class={`circle-number flex justify-center align-center ${
+        isButtonActive() ? "active" : ""
+      }
     `}
       onClick={onNumberClick}
       data-question={circleNumber}
@@ -45,11 +58,10 @@ const CircleNumber: Component<CircleNumberProps> = ({
 };
 
 const App: Component = () => {
-
   const [countries] = createResource(fetchCountries);
   const [currentQuestion, setCurrentQuestion] = createSignal(1);
-  let randomCountries: Country[] = [];
-
+  const [questions, setQuestions] = createSignal<QuestionType[]>([]);
+  
 
   function handleNumberClick(event: Event) {
     const target = event.target as HTMLButtonElement;
@@ -59,20 +71,13 @@ const App: Component = () => {
   }
 
   createEffect(() => {
-    let isFetching = true;
+    if (!countries.loading && !countries.error && countries() && countries()!.length > 0) {
+      const questionsData = getQuestions(countries()!, NOMBER_OF_QUESTIONS);
+      console.log("questionsData", questionsData)
+      setQuestions(questionsData);
 
-    const fetchCountriesData = async () => {
-      const countriesData = await fetchCountries();
-      randomCountries = shuffleArray(countriesData).slice(0, NOMBER_OF_QUESTIONS);
-      isFetching = false;
-    };
-
-    fetchCountriesData();
-
-    onCleanup(() => {
-      // Cleanup if the component is unmounted before data is fetched
-      isFetching = false;
-    });
+      console.log("questions signal", questions());
+    }
   });
 
   return (
@@ -94,19 +99,15 @@ const App: Component = () => {
         </div>
         <Suspense fallback={<Loader />}>
           <Show when={!countries.loading && !countries.error}>
-            <Switch>
-              <Match when={countries() !== undefined}> {/* Match when, is not recognized by typescript */}
-                <div class="questions-container">
-                  <For each={shuffleArray(countries()!).slice(0, NOMBER_OF_QUESTIONS)}>
-                    {(country) => <Question country={country} />}
-                  </For>
-                </div>
-              </Match>
-              <Match when={countries.error}>
-                <div>Error fetching data</div>
-              </Match>
-            </Switch>
+                {questions().map((question, index) => {
+                  return (
+                    <Show when={index + 1 === currentQuestion()}>
+                      <Question question={question} />
+                    </Show>
+                  );
+                })}
           </Show>
+          <Show when={countries.error}>Error while getting countries data: {countries.error.message}</Show>
         </Suspense>
       </div>
     </div>

@@ -1,3 +1,14 @@
-.question-container {
-    width: 100%;
+.question {
+    margin-block-start: 3rem;
+
+    .flag-question {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 1.5rem;
+            margin-inline: 0.4rem;
+            display: inline-block;
+        }
+    }
 }

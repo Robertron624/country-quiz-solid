@@ -1,21 +1,38 @@
-import { Country } from '../types';
+import { QuestionType } from '../types';
 import './Question.scss';
 
-import { getQuestionFromCountry } from '../utils';
+interface QuestionOptionProps {
+    option: string;
+}
+
+function QuestionOption(
+    { option }: QuestionOptionProps
+) {
+    return (
+        <div class="question-option">
+            {option}
+        </div>
+    )
+}
 
 interface QuestionProps {
-    country: Country;
+    question: QuestionType;
 }
 
 export default function Question(
-    { country }: QuestionProps
+    { question }: QuestionProps
 ) {
 
-    const countryQuestion = getQuestionFromCountry(country, [], 'capital');
+    console.log("question received", question);
 
     return (
-        <div class="question">
-            <h2>What is the capital of {country?.name.common}?</h2>
+        <div class="question"
+        >
+                <div class='main-question'>
+                    {question.type === "capital" ? <p class='capital-question'>Which conutry is {question.countryCapital} the capital?</p>:<div class='flag-question'>
+                            Which country does this flag <img src={question.flagUrl} alt="country flag" /> belong to?
+                        </div>}
+                </div>
         </div>
     )
 }
