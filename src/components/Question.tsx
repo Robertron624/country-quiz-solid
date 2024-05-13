@@ -74,24 +74,34 @@ export default function Question({
     if (optionString === correctAnswer) {
       setCorrectAnswers((prev) => prev + 1);
 
-        if (questionIndex === 9) {
-            setIsGameFinished(true);
-        } else {
-            toast.success("Correct Answer! Next Question...", 
-                { duration: durationBetweenQuestions, position: "top-right" }
-            );
+      if (questionIndex === 9) {
+        setIsGameFinished(true);
+      } else {
+        toast.success("Correct Answer! Next Question...", {
+          duration: durationBetweenQuestions,
+          position: "top-right",
+          ariaProps: { role: "alert", "aria-live": "assertive" },
+        });
 
-            setTimeout(() => {
-                setCurrentQuestion((prev) => prev + 1);
-                setShowCorrect(false);
-                setSelectedOption("");
-            }, durationBetweenQuestions);
-        }
-    }
-    else {
+        setTimeout(() => {
+          setCurrentQuestion((prev) => prev + 1);
+          setShowCorrect(false);
+          setSelectedOption("");
+        }, durationBetweenQuestions);
+      }
+    } else {
+      toast.error("Wrong Answer :(", {
+        duration: durationBetweenQuestions,
+        position: "top-right",
+      });
+
+      setTimeout(() => {
+        setShowCorrect(false);
+        setSelectedOption("");
         // finish the game
         setIsGameFinished(true);
-    }   
+      }, durationBetweenQuestions);
+    }
   };
 
   return (
@@ -99,7 +109,7 @@ export default function Question({
       <div class='main-question'>
         {question.type === "capital" ? (
           <p class='capital-question'>
-            Which conutry is {question.countryCapital} the capital?
+            Which country is {question.countryCapital} the capital?
           </p>
         ) : (
           <div class='flag-question'>
