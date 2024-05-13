@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  padding-inline: 1rem;
 
   .container {
     padding-inline: 2rem;
@@ -17,7 +18,8 @@
   
       .numbers {
         margin-block-start: 1.5rem;
-        gap: 2rem;
+        gap: clamp(1rem, 2vw, 2rem);
+        flex-wrap: wrap;
   
         .circle-number {
           width: 2.5rem;

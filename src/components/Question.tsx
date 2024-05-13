@@ -23,6 +23,7 @@ function QuestionOption(
         <button 
             class={`option ${selectedOption() == option ? 'selected': ''}`}
             onClick={onClick}
+            data-option={option}
         >
             {option} {showCorrect() && isThisCorrect ? <img 
                 class="correct-icon" 
@@ -50,8 +51,8 @@ export default function Question(
     const correctAnswer = question.correctAnswer;
 
     const onOptionClick = (event: Event) => {
-        const optionString = (event.target as HTMLButtonElement).innerText;
-        setSelectedOption(optionString);
+        const optionString = (event.target as HTMLButtonElement).dataset.option;
+        setSelectedOption(optionString as string);
         setShowCorrect(true);
     }
 

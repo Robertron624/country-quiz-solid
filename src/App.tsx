@@ -69,13 +69,20 @@ const App: Component = () => {
   const [countries] = createResource(fetchCountries);
   const [currentQuestion, setCurrentQuestion] = createSignal(1);
   const [questions, setQuestions] = createSignal<QuestionType[]>([]);
-  const [isGameFinished, setIsGameFinished] = createSignal(true);
+  const [isGameFinished, setIsGameFinished] = createSignal(false);
+  const [correctAnswers, setCorrectAnswers] = createSignal(0);
 
   function handleNumberClick(event: Event) {
     const target = event.target as HTMLButtonElement;
     const questionNumber = parseInt(target.dataset.question || "1", 10);
 
     setCurrentQuestion(questionNumber);
+  }
+
+  function onPlayAgain() {
+    setIsGameFinished(false);
+    setCurrentQuestion(1);
+    setCorrectAnswers(0);
   }
 
   createEffect(() => {
@@ -96,7 +103,7 @@ const App: Component = () => {
         <Show when={!isGameFinished()}>
           <div class='wrapper'>
             <h1>Country Quiz</h1>
-            <div class='numbers flex'>
+            <div class='numbers flex flex-wrap'>
               <For each={numbers}>
                 {(number) => {
                   const buttonProps = {
@@ -128,7 +135,11 @@ const App: Component = () => {
           </div>
         </Show>
         <Show when={isGameFinished()}>
-          <FinishCard />
+          <FinishCard 
+            correctAnswers={correctAnswers()} 
+            totalQuestions={NOMBER_OF_QUESTIONS} 
+            onPlayAgain={onPlayAgain}
+          />
         </Show>
       </div>
     </div>
