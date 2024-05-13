@@ -2,14 +2,15 @@
 import congratsImage from '../assets/congrats.svg';
 import './FinishCard.scss';
 
+import { NUMBER_OF_QUESTIONS } from '../constants';
+
 interface FinishCardProps {
     correctAnswers: number;
-    totalQuestions: number;
     onPlayAgain: () => void;
 }
 
 export default function FinishCard(
-    { correctAnswers, totalQuestions, onPlayAgain }: FinishCardProps
+    { correctAnswers, onPlayAgain }: FinishCardProps
 ) {
   return (
     <div class="finish-card">
@@ -20,7 +21,7 @@ export default function FinishCard(
             Congrats! You finished the quiz.
         </p>
         <p class="sub-message">
-            You answer {correctAnswers}/{totalQuestions} correctly.
+            You answer {correctAnswers}/{NUMBER_OF_QUESTIONS} correctly.
         </p>
         <button class="play-again" onClick={onPlayAgain}>
             Play Again

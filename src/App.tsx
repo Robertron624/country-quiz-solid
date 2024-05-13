@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import { Toaster } from "solid-toast";
 import {
   For,
   createSignal,
@@ -10,17 +11,18 @@ import {
 } from "solid-js";
 import Axios from "axios";
 
+import "./App.scss";
+
 import Question from "./components/Question";
 import FinishCard from "./components/FinishCard";
-import { Country, QuestionType } from "./types";
-import { getQuestions } from "./utils";
-
-import "./App.scss";
 import Loader from "./components/Loader";
 
+import { Country, QuestionType } from "./types";
+import { getQuestions } from "./utils";
+import { NUMBER_OF_QUESTIONS } from "./constants";
+
 const baseCountryUrl = "https://restcountries.com/v3.1/";
-const NOMBER_OF_QUESTIONS = 10;
-const numbers = Array.from({ length: NOMBER_OF_QUESTIONS }, (_, i) => i + 1);
+const numbers = Array.from({ length: NUMBER_OF_QUESTIONS }, (_, i) => i + 1);
 
 const fetchCountries = async () => {
   try {
@@ -92,13 +94,14 @@ const App: Component = () => {
       countries() &&
       countries()!.length > 0
     ) {
-      const questionsData = getQuestions(countries()!, NOMBER_OF_QUESTIONS);
+      const questionsData = getQuestions(countries()!, NUMBER_OF_QUESTIONS);
       setQuestions(questionsData);
     }
   });
 
   return (
     <div class={`App`}>
+      <Toaster />
       <div class={`max-w-800 container`}>
         <Show when={!isGameFinished()}>
           <div class='wrapper'>
@@ -121,7 +124,13 @@ const App: Component = () => {
                 {questions().map((question, index) => {
                   return (
                     <Show when={index + 1 === currentQuestion()}>
-                      <Question question={question} />
+                      <Question 
+                        question={question} 
+                        questionIndex={index}
+                        setCorrectAnswers={setCorrectAnswers}
+                        setCurrentQuestion={setCurrentQuestion}
+                        setIsGameFinished={setIsGameFinished}
+                      />
                     </Show>
                   );
                 })}
@@ -137,7 +146,6 @@ const App: Component = () => {
         <Show when={isGameFinished()}>
           <FinishCard 
             correctAnswers={correctAnswers()} 
-            totalQuestions={NOMBER_OF_QUESTIONS} 
             onPlayAgain={onPlayAgain}
           />
         </Show>
