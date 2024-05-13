@@ -9,37 +9,40 @@
     background-color: $color-primary;
     border-radius: 1rem;
 
-    h1 {
-      color: $color-neutral;
-      font-size: 1rem;
-    }
-
-    .numbers {
-      margin-block-start: 1.5rem;
-      gap: 2rem;
-
-      .circle-number {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-        background-color: $color-accent;
-        color: $color-secondary;
-        font-size: $font-size-sm;
-        transition: background-color 0.3s;
-        border: 1px solid $color-accent;
-
-        &:hover {
-          background-color: $color-primary;
+    .wrapper {
+      h1 {
+        color: $color-neutral;
+        font-size: 1rem;
+      }
+  
+      .numbers {
+        margin-block-start: 1.5rem;
+        gap: 2rem;
+  
+        .circle-number {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          background-color: $color-accent;
+          color: $color-secondary;
+          font-size: $font-size-sm;
+          transition: background-color 0.3s;
+          border: 1px solid $color-accent;
+  
+          &:hover {
+            background-color: $color-primary;
+          }
+  
+          &.active {
+            background: $btn-horizontal-gradient;
+          }
         }
-
-        &.active {
-          background: $btn-horizontal-gradient;
-        }
+      }
+  
+      .questions-container {
+        margin-top: 2rem;
       }
     }
 
-    .questions-container {
-      margin-top: 2rem;
-    }
   }
 }

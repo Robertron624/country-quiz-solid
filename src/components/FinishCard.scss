@@ -1,0 +1,36 @@
+@import "../variables.scss";
+
+.finish-card {
+    color: $color-secondary;
+    padding-block-end: 2rem;
+
+    .main-message {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-block-start: 1.5rem;
+    }
+
+    .sub-message {
+        font-size: 1rem;
+        margin-block-start: 1rem;
+    }
+
+    .play-again {
+        margin-block-start: 3rem;
+        background: $btn-horizontal-gradient;
+        color: $color-secondary;
+        padding: 1.2rem 1rem;
+        width: 100%;
+        max-width: 240px;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 3px 4px 10px 5px rgba(225, 106, 106, 0.2)
+        }
+    }
+}
