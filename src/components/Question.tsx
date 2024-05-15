@@ -112,7 +112,7 @@ export default function Question({
             Which country is {question.countryCapital} the capital?
           </p>
         ) : (
-          <div class='flag-question'>
+          <div class='flag-question flex-wrap'>
             Which country does this flag{" "}
             <img src={question.flagUrl} alt='country flag' /> belong to?
           </div>

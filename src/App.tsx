@@ -18,7 +18,7 @@ import FinishCard from "./components/FinishCard";
 import Loader from "./components/Loader";
 
 import { Country, QuestionType } from "./types";
-import { getQuestions } from "./utils";
+import { getQuestions, shuffleArray } from "./utils";
 import { NUMBER_OF_QUESTIONS } from "./constants";
 
 const baseCountryUrl = "https://restcountries.com/v3.1/";
@@ -81,10 +81,18 @@ const App: Component = () => {
     setCurrentQuestion(questionNumber);
   }
 
+  function getNewQuestions() {
+    const currentCountries = countries() || [];
+    const shuffledCountries = shuffleArray(currentCountries);
+    const questionsData = getQuestions(shuffledCountries, NUMBER_OF_QUESTIONS);
+    setQuestions(questionsData);
+  }
+
   function onPlayAgain() {
     setIsGameFinished(false);
     setCurrentQuestion(1);
     setCorrectAnswers(0);
+    getNewQuestions();
   }
 
   createEffect(() => {
