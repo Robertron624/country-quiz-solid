@@ -1,34 +1,78 @@
-## Usage
+# [Frontend Country Quiz]
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+This is a simple quiz app to test your knowledge about countries.
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Screenshot](#screenshot)
+- [Live Demo](#live-demo)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Getting Started](#getting-started)
+- [Author](#author)
+
+## Introduction
+
+This is a pure frontend project that uses the REST Countries API to fetch the data about the countries. The user will be asked two type of questions: what country a city is the capital of and which country belongs a flag. The user will be able to see the score at the end of the quiz.
+
+This game is a project from the dev-challenges website. You can see the challenge page [here](https://devchallenges.io/challenge/country-quizz)
+
+## Screenshot
+![Country Quiz](screenshot.png)
+
+## Live Demo
+
+- [Check it out here](https://stunning-donut-b843fc.netlify.app/)
+
+## Features
+
+- Fetch data from the REST Countries API
+- Two types of questions: capital of a city and flag of a country
+- Score at the end of the quiz
+- Responsive design
+- Start again with new questions
+
+## Technologies
+
+- HTML
+- SCSS (Sass) for styling
+ - SolidJS (JavaScript library)
+- TypeScript (JavaScript superset)
+- Vite (bundler)
+- REST Countries API
+- Netlify (deployment)
+
+## Getting Started
+
+- Clone this repository
+- Install node.js if you don't have it
+- Install pnpm if you don't have it
+- Go to the project directory in your terminal
+
+- Run this command to install dependencies:
 
 ```bash
-$ npm install # or pnpm install or yarn install
+    pnpm install
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+- Run this command to run the project locally:
 
-## Available Scripts
+```bash
+    pnpm run dev
+```
 
-In the project directory, you can run:
+This will launch the project in localhost
 
-### `npm run dev` or `npm start`
+- Run this command to build the project
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+    pnpm run build
+```
 
-The page will reload if you make edits.<br>
+## Author
 
-### `npm run build`
+- [LinkedIn](www.linkedin.com/in/roberto-ramirez-aguilar)
+- [Github](https://github.com/Robertron624)
+- [Webpage](https://robert-ramirez.co/)
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
