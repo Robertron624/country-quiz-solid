@@ -23,7 +23,7 @@ This game is a project from the dev-challenges website. You can see the challeng
 
 ## Live Demo
 
-- [Check it out here](https://stunning-donut-b843fc.netlify.app/)
+- [Check it out here](https://main--aesthetic-lebkuchen-77aabe.netlify.app/)
 
 ## Features
 
